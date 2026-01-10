@@ -239,6 +239,21 @@
             });
         });
     </script>
+<script>
+    const dateElement = document.getElementById("hub-date");
+
+    const today = new Date();
+
+    const options = {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    };
+
+    const formattedDate = today.toLocaleDateString("es-MX", options);
+
+    dateElement.textContent = formattedDate;
+</script>
 
 </body>
 </html>
