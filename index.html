@@ -248,13 +248,13 @@ const hour = now.getHours();
 let statusText = "";
 
 if (hour >= 6 && hour < 12) {
-    statusText = "despertando";
+    statusText = " despertando";
 } else if (hour >= 12 && hour < 18) {
-    statusText = "activo";
+    statusText = " activo";
 } else if (hour >= 18 && hour < 23) {
-    statusText = "observandote";
+    statusText = " observandote";
 } else {
-    statusText = "acaso tienes insomnio?";
+    statusText = " acaso tienes insomnio?";
 }
 
 statusElement.textContent = statusText;
