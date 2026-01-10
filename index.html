@@ -239,6 +239,8 @@
             });
         });
     </script>
+<script>
+    
 const statusElement = document.getElementById("hub-status");
 const now = new Date();
 const hour = now.getHours();
@@ -250,13 +252,12 @@ if (hour >= 6 && hour < 12) {
 } else if (hour >= 12 && hour < 18) {
     statusText = "activo";
 } else if (hour >= 18 && hour < 23) {
-    statusText = "observando";
+    statusText = "observandote";
 } else {
-    statusText = "latente";
+    statusText = "acaso tienes insomnio?";
 }
 
 statusElement.textContent = statusText;
-<script>
     const dateElement = document.getElementById("hub-date");
 
     const today = new Date();
