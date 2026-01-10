@@ -215,6 +215,21 @@
             </div>
         </footer>
     </div>
+    <script>
+        document.getElementById('playlistSearch').addEventListener('keyup', function() {
+            let filter = this.value.toUpperCase();
+            let items = document.querySelectorAll('.playlist-item');
+
+            items.forEach(item => {
+                let text = item.textContent || item.innerText;
+                if (text.toUpperCase().indexOf(filter) > -1) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
