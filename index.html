@@ -254,10 +254,10 @@ if (hour >= 6 && hour < 12) {
 } else if (hour >= 18 && hour < 23) {
     statusText = " observandote";
 } else {
-    statusText = " acaso tienes insomnio?";
+    statusText = " viendo que no duermes";
 }
 
-statusElement.textContent = statusText;
+statusElement.textContent = statusText.toUpperCase();
     const dateElement = document.getElementById("hub-date");
 
     const today = new Date();
