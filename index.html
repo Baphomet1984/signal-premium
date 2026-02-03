@@ -30,6 +30,7 @@
             padding: 40px 20px;
         }
 
+        /* --- HEADER & CORE --- */
         header { text-align: center; margin-bottom: 20px; }
         .header-img { width: 150px; height: auto; margin-bottom: 10px; }
         
@@ -53,55 +54,53 @@
             box-shadow: 0 0 15px rgba(29, 185, 84, 0.2);
         }
 
-        <style>
-    /* --- AVATAR SYSTEM (CORREGIDO) --- */
-    #hub-avatar {
-        position: fixed; 
-        top: 20px;       /* Distancia desde arriba */
-        right: 20px;     /* Distancia desde la derecha */
-        width: 60px; 
-        height: 60px;
-        border-radius: 50%; 
-        z-index: 10000;  /* Valor muy alto para que nada lo tape */
-        cursor: pointer;
-        background: rgba(0,0,0,0.8); 
-        backdrop-filter: blur(8px);
-        border: 2px solid var(--card-border); 
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden; /* Asegura que la imagen no sobresalga */
-        box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    }
+        /* --- AVATAR SYSTEM (FIJO Y CORREGIDO) --- */
+        #hub-avatar {
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            width: 60px; 
+            height: 60px;
+            border-radius: 50%; 
+            z-index: 10000; /* Siempre al frente */
+            cursor: pointer;
+            background: rgba(0,0,0,0.8); 
+            backdrop-filter: blur(8px);
+            border: 2px solid var(--card-border); 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
 
-    #hub-avatar:hover { 
-        transform: scale(1.1); 
-        border-color: var(--primary-color);
-        box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
-    }
+        #hub-avatar:hover { 
+            transform: scale(1.1); 
+            border-color: var(--primary-color);
+        }
 
-    #hub-avatar img { 
-        width: 110%; /* Ligeramente más grande para evitar bordes blancos */
-        height: 110%; 
-        object-fit: cover; 
-    }
+        #hub-avatar img { 
+            width: 110%; 
+            height: 110%; 
+            object-fit: cover; 
+        }
 
-    #avatar-panel {
-        position: fixed; 
-        top: 90px;      /* Justo debajo del avatar */
-        right: 20px; 
-        width: 200px; 
-        padding: 15px;
-        border-radius: 12px; 
-        background: rgba(15, 15, 15, 0.98);
-        backdrop-filter: blur(12px); 
-        border: 1px solid var(--card-border);
-        display: none; 
-        z-index: 9999; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    }
-</style>
+        #avatar-panel {
+            position: fixed; 
+            top: 90px; 
+            right: 20px; 
+            width: 200px; 
+            padding: 15px;
+            border-radius: 12px; 
+            background: rgba(15, 15, 15, 0.98);
+            backdrop-filter: blur(12px); 
+            border: 1px solid var(--card-border);
+            display: none; 
+            z-index: 9999; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
         #avatar-panel button {
             width: 100%; margin-top: 8px; background: #1a1a1a;
             border: 1px solid #333; color: #ccc; padding: 8px;
@@ -160,7 +159,7 @@
             <a href="https://baphomet1984.github.io/systemtag/gate/?lvl=core&go=signal-core" class="core-button">
                 <i class="fa-solid fa-layer-group"></i> Acceder a Signal Core
             </a>
-            <p style="font-size: 0.7rem; color: #555; margin-top: 8px;">Contenido general disponible</p>
+            <p style="font-size: 0.75rem; color: #666; margin-top: 8px;">Contenido general disponible para todos los usuarios</p>
         </div>
     </header>
 
@@ -212,7 +211,7 @@
                 <li class="playlist-item"><a href="https://la.movie/"><i class="fa-solid fa-film"></i> SERIES/MOVIES (Sin basura)</a></li>
                 <li class="playlist-item"><a href="https://www.xvideos.com/"><i class="fa-solid fa-mask"></i> XVIDEOS</a></li>
             </ul>
-            <p style="font-size: 0.75rem; color: var(--accent-gray); margin-top: 10px;">Si CARTOONS pide VPN, usa <a href="https://play.google.com/store/apps/details?id=com.free.vpn.mexico.proxy.planet" style="color:var(--primary-color)">Planet VPN</a>.</p>
+            <p style="font-size: 0.75rem; color: var(--accent-gray); margin-top: 10px;">Si CARTOONS pide VPN, usa <a href="https://play.google.com/store/apps/details?id=com.free.vpn.mexico.proxy.planet" style="color:var(--primary-color); text-decoration: none;">Planet VPN aquí</a>.</p>
         </section>
     </main>
 
@@ -224,7 +223,7 @@
 </div>
 
 <script>
-    // Script del buscador (reparado)
+    // --- BUSCADOR ---
     document.getElementById('playlistSearch').addEventListener('keyup', function() {
         let filter = this.value.toLowerCase();
         let sections = document.querySelectorAll('.search-section');
@@ -248,26 +247,32 @@
         });
     });
 
-    // Logica de estado por hora
-    const statusElement = document.getElementById("hub-status");
-    const now = new Date();
-    const hour = now.getHours();
-    let statusText = "";
-    if (hour >= 6 && hour < 12) statusText = "Despertando";
-    else if (hour >= 12 && hour < 18) statusText = "Activo";
-    else if (hour >= 18 && hour < 23) statusText = "Observándote";
-    else statusText = "Viendo que no duermes";
-    
-    statusElement.textContent = statusText.toUpperCase();
-    document.getElementById("hub-date").textContent = now.toLocaleDateString("es-MX");
+    // --- LOGICA DE ESTADO ---
+    function updateStatus() {
+        const statusElement = document.getElementById("hub-status");
+        const hour = new Date().getHours();
+        let statusText = "";
+        
+        if (hour >= 6 && hour < 12) statusText = "Despertando";
+        else if (hour >= 12 && hour < 18) statusText = "Activo";
+        else if (hour >= 18 && hour < 23) statusText = "Observándote";
+        else statusText = "Viendo que no duermes";
+        
+        statusElement.textContent = statusText.toUpperCase();
+        document.getElementById("hub-date").textContent = new Date().toLocaleDateString("es-MX");
+    }
+    updateStatus();
 
-    // Avatar Hub
+    // --- AVATAR SYSTEM ---
     const avatar = document.getElementById("avatar");
     const panel = document.getElementById("avatar-panel");
     const base = "https://api.dicebear.com/7.x/adventurer-neutral/svg";
+    
+    // Semilla inicial
     avatar.src = `${base}?seed=demon-01&backgroundColor=000000`;
 
-    avatar.addEventListener("click", () => {
+    avatar.addEventListener("click", (e) => {
+        e.stopPropagation();
         panel.style.display = panel.style.display === "block" ? "none" : "block";
     });
 
@@ -279,8 +284,11 @@
         avatar.style.opacity = avatar.style.opacity === "0.2" ? "1" : "0.2";
     }
 
+    // Cerrar panel al hacer clic fuera
     document.addEventListener("click", (e) => {
-        if (!avatar.contains(e.target) && !panel.contains(e.target)) panel.style.display = "none";
+        if (!avatar.contains(e.target) && !panel.contains(e.target)) {
+            panel.style.display = "none";
+        }
     });
 </script>
 
