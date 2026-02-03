@@ -1,12 +1,27 @@
+<!--<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Signal Unlkd</title>
+</head>
+<body>
+
+  <script src="protect.js"></script>
+
+  <h1>Signal Unlkd</h1>
+  <p>Acceso limitado, pero acceso al fin.</p>
+
+</body>
+</html>-->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Door-01 | Key#01</title>
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
+
     <style>
         :root {
             --primary-color: #1DB954; /* Verde oficial de Spotify */
@@ -31,11 +46,11 @@
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         .header-img {
-            width: 300px; /* Ajusta el tamaño de tu imagen aquí */
-            height: 50px;
+            width: 150px; /* Ajusta el tamaño de tu imagen aquí */
+            height: 25px;
             /*border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--primary-color);*/
@@ -79,6 +94,15 @@
     font-size: 0.75rem;
     color: #666;
 }
+
+.hub-status {
+  margin: 20px 0;
+  font-size: 0.75rem;
+  color: #666;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
         h1 { 
             color: var(--primary-color); 
             text-transform: uppercase;
@@ -87,13 +111,6 @@
             margin: 0;
         }
 
-        h2 { 
-            font-size: 1.2rem; 
-            margin-top: 50px; 
-            color: #b3b3b3;
-            border-bottom: 1px solid var(--card-border);
-            padding-bottom: 10px;
-        }
 
                 /* Buscador */
         .search-container {
@@ -210,7 +227,68 @@
             text-align: center;
             padding-bottom: 40px;
         }
+ /*Mini player*/
+.miniVideo {
+  width: 100%;
+  height: 180px;
+  border: none;
+}
+/*hasta aquí el mini player*/
+#hub-avatar {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  z-index: 9999;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+#hub-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+#avatar-panel {
+  position: fixed;
+  top: 80px;
+  right: 16px;
+  width: 220px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #b3b3b3;
+  font-size: 0.8rem;
+  display: none;
+  z-index: 9998;
+}
+
+#avatar-panel button {
+  width: 100%;
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #b3b3b3;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#avatar-panel button:hover {
+  border-color: var(--primary-color);
+  color: #fff;
+}
         /* Estilo para el contador */
         .footer-counter {
             filter: invert(1); /* Invierte color del contador si es necesario para fondo negro */
@@ -219,14 +297,17 @@
     </style>
 </head>
 <body>
-
+<script src="protect.js"></script>
     <div class="container">
-        
+
         <header>
-            <img src="systemtag-gif2.gif" class="header-img">
-            <h1><!--<i class="fab fa-spotify"></i>--> Bienvenido a Signal</h1>
+            <img src="../../assets/img/sytemtag-gif2.gif" class="header-img">
+
+<h2><!--<i class="fab fa-spotify"></i>--> UNLKD-ONLY:no es solo un QR,es identidad digital</h2>
+
 <div class="core-access">
-    <a href="https://baphomet1984.github.io/signal-core/" class="core-button">
+    <a href="https://baphomet1984.github.io/systemtag/gate/?lvl=core&go=signal-core
+" class="core-button">
         <i class="fa-solid fa-layer-group"></i>
         Acceder a Signal Core
     </a>
@@ -237,10 +318,29 @@
 <script src="https://elfsightcdn.com/platform.js" async></script>
 <div class="elfsight-app-1c4d0ae1-891a-4847-86b0-00553260b99b" data-elfsight-app-lazy></div>
         </header>
+<!-- AVATAR HUB -->
+<div id="hub-avatar">
+  <img id="avatar" alt="System Avatar">
+</div>
+
+<div id="avatar-panel">
+  <p>SYSTEM // UNLKD</p>
+  <button onclick="changeAvatar()">Mutar identidad</button>
+  <button onclick="toggleStealth()">Modo sigilo</button>
+</div>
+<!-- /AVATAR HUB -->
+<!--estado del sistema-->
         <div class="hub-status">
             <p>Estado:<span id="hub-status"></span></p>
             <p>Última mutación: <span id="hub-date"></span></p>
-        </div>   
+</div>
+<!--avatar: Estilos:
+identicon (tech, hacker)
+bottts (muy system-core)
+pixel-art
+adventurer-neutral-->
+
+
         <div class="search-container">
             <i class="fa fa-search"></i>
             <input type="text" id="playlistSearch" placeholder="Buscar playlist...">
@@ -254,18 +354,49 @@
                     <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1DXcfZ6moR6J0G?si=EnT90tSRRwaTbFD2N0vfGQ"><i class="fab fa-spotify"></i> 3.New Metal</a></li>
                     <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1DWTe5ECpTKzMo?si=dTi2iGlEQJqUDQCHhXrLrQ"><i class="fab fa-spotify"></i> 4.Hip Hop MX 24K</a></li>
                     <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1EIea0ChiRU7ji?si=Eh1WKcBvQBqTfx3IcVPR-Q"><i class="fab fa-spotify"></i> 5.Doom</a></li>
-                    <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1DWTmGGCbcoQhY?si=9htAtALLTWqE3o3LG9TqNg"><i class="fab fa-spotify"></i> 6. CUMBIA SONIDERA</a></li>
-                    <li class="playlist-item"><a href="https://open.spotify.com/playlist/1z9BMuPLZE7bVemN5E85rV?si=vs4BVFxjTgyUycoBLQpARQ"><i class="fab fa-spotify"></i> 7. HITS TIKTOK MEXICO</a></li>
-                </ul>
-            <!--REPRODUCTOR DE SPOTIFY-->
-            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZEVXdezsuDdNH1jV?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
-            <h2>Catarsis y Ruido controlado</h2>
+<li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1DWYMHB55fgZrY?si=C0gKOkwdS_OKb2gXXrERkQ"><i class="fab fa-spotify"></i> 6. ROCK MEXICANO</a></li>
+                    <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1EIcM7vKLqtJgT?si=MU8P6kObS_efOEAuU7b73A"><i class="fab fa-spotify"></i> 7. TECHNO OSCURO</a></li>
+
+
+
+                    <rssapp-ticker id="OeLsywezx7YoL8ZZ"></rssapp-ticker><script src="https://news.google.com/search?q=Noticias%20de%20hoy&hl=en-US&gl=US&ceid=US%3Aen" type="text/javascript" async></script>
+                 </ul>
+            <!--REPRODUCTOR DE SPOTIFY-->
+         <!--ventana para descargas-->
+          <h2>bajate una rola</h2>
+<iframe 
+    class="miniVideo"
+    src="https://resto-tajmahal.fr/"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+
+
+          <!--ventana para pelis-->
+          <h2>cine</h2>
+<iframe 
+    class="miniVideo"
+    src="https://www.cinecalidad.ec/"
+    frameborder="0"
+    allowfullscreen>
+  </iframe>
+            <h2>TUS WEBS </h2>
             <ul class="playlist-group">
-                <!--    <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1EIea0ChiRU7ji?si=l1tpgnOTSceRtCiN5SMSWQ"><i class="fab fa-spotify"></i> 8. METAL DENSO</a></li>-->
-                    <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1DWYMHB55fgZrY?si=C0gKOkwdS_OKb2gXXrERkQ"><i class="fab fa-spotify"></i> 9. ROCK MEXICANO</a></li>
-                    <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1EIcM7vKLqtJgT?si=MU8P6kObS_efOEAuU7b73A"><i class="fab fa-spotify"></i> 10. TECHNO OSCURO</a></li>
-                <!--    <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1DWTe5ECpTKzMo?si=8IR6Y2vHRByTr_w5FnmT_w"><i class="fab fa-spotify"></i> 11. HIP-HOP MX 24K</a></li>-->
+
+<!--CORREO-->
+<li class="playlist-item"><a href="https://mail.google.com/mail/mu/mp/535/#tl/priority/%5Esmartlabel_personal">GMAIL</a></li>
+
+
+<!--SERIES Y PELICULAS--> 
+<li class="playlist-item"><a href="https://www.lacartoons.com/">CARTOONS</a></li><h3>si te pide VPN da click <a href="https://play.google.com/store/apps/details?id=com.free.vpn.mexico.proxy.planet"> aquí</a></h3>
+
+<li class="playlist-item"><a href="https://www.cinecalidad.ec/">SERIES/MOVIES</a></li>
+
+<li class="playlist-item"><a href="https://la.movie/">SERIES/MOVIES sin basura</a></li> 
+
+<!--LO PROHIBIDO-->
+<li class="playlist-item"><a href="https://www.xvideos.com/">XVIDEOS</a></li>        
                 </ul>   
 
            <!-- <div class="widget-container">
@@ -295,7 +426,7 @@
         });
     </script>
 <script>
-    
+
 const statusElement = document.getElementById("hub-status");
 const now = new Date();
 const hour = now.getHours();
@@ -327,6 +458,44 @@ statusElement.textContent = statusText.toUpperCase();
 
     dateElement.textContent = formattedDate;
 </script>
+<!--estado del avatar-->
+<script>
+// === AVATAR CORE ===
+const unlkdId = "demon-01";
+const avatar = document.getElementById("avatar");
+const panel = document.getElementById("avatar-panel");
 
+// mood por hora
+const hourNow = new Date().getHours();
+let mood = "neutral";
+if (hourNow >= 18 && hourNow < 23) mood = "angry";
+if (hourNow >= 23 || hourNow < 6) mood = "sleepy";
+
+const base = "https://api.dicebear.com/7.x/adventurer-neutral/svg";
+avatar.src = `${base}?seed=${unlkdId}-${mood}&v=${Date.now()}`;
+
+// toggle panel
+avatar.addEventListener("click", () => {
+  panel.style.display = panel.style.display === "block" ? "none" : "block";
+});
+
+// acciones
+function changeAvatar() {
+  const seed = Math.random().toString(36).substring(7);
+  avatar.src = `${base}?seed=${seed}&v=${Date.now()}`;
+}
+
+function toggleStealth() {
+  avatar.style.opacity =
+    avatar.style.opacity === "0.2" ? "1" : "0.2";
+}
+</script>
+<script>
+document.addEventListener("click", (e) => {
+  if (!avatar.contains(e.target) && !panel.contains(e.target)) {
+    panel.style.display = "none";
+  }
+});
+</script>
 </body>
 </html>
