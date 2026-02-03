@@ -30,7 +30,6 @@
             padding: 40px 20px;
         }
 
-        /* --- HEADER & CORE --- */
         header { text-align: center; margin-bottom: 20px; }
         .header-img { width: 150px; height: auto; margin-bottom: 10px; }
         
@@ -125,7 +124,7 @@
         <h2>UNLKD-ONLY: Identidad Digital</h2>
         
         <div class="core-access">
-            <a href="#" class="core-button">
+            <a href="https://baphomet1984.github.io/systemtag/gate/?lvl=core&go=signal-core" class="core-button">
                 <i class="fa-solid fa-layer-group"></i> Acceder a Signal Core
             </a>
             <p style="font-size: 0.7rem; color: #555; margin-top: 8px;">Contenido general disponible</p>
@@ -154,10 +153,13 @@
             <h2>Perfil Sonoro</h2>
             <h3>> Selección personal del portador</h3>
             <ul>
-                <li class="playlist-item"><a href="#"><i class="fab fa-spotify"></i> 1. Manson</a></li>
-                <li class="playlist-item"><a href="#"><i class="fab fa-spotify"></i> 2. Gotico</a></li>
-                <li class="playlist-item"><a href="#"><i class="fab fa-spotify"></i> 3. New Metal</a></li>
-                <li class="playlist-item"><a href="#"><i class="fab fa-spotify"></i> 4. Hip Hop MX 24K</a></li>
+                <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1EIXuvYF1J44v1?si=4KBqYQeCRYSa7QI1GBRuzg"><i class="fab fa-spotify"></i> 1. Manson</a></li>
+                <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1E4xadFD2IyUbd?si=k3iJLuTITFaWM7hiddSyBQ"><i class="fab fa-spotify"></i> 2. Gotico</a></li>
+                <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1DXcfZ6moR6J0G?si=EnT90tSRRwaTbFD2N0vfGQ"><i class="fab fa-spotify"></i> 3. New Metal</a></li>
+                <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1DWTe5ECpTKzMo?si=dTi2iGlEQJqUDQCHhXrLrQ"><i class="fab fa-spotify"></i> 4. Hip Hop MX 24K</a></li>
+                <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1EIea0ChiRU7ji?si=Eh1WKcBvQBqTfx3IcVPR-Q"><i class="fab fa-spotify"></i> 5. Doom</a></li>
+                <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1DWYMHB55fgZrY?si=C0gKOkwdS_OKb2gXXrERkQ"><i class="fab fa-spotify"></i> 6. ROCK MEXICANO</a></li>
+                <li class="playlist-item"><a href="https://open.spotify.com/playlist/37i9dQZF1EIcM7vKLqtJgT?si=MU8P6kObS_efOEAuU7b73A"><i class="fab fa-spotify"></i> 7. TECHNO OSCURO</a></li>
             </ul>
         </section>
 
@@ -171,11 +173,13 @@
         <section class="search-section">
             <h2>Tus Webs</h2>
             <ul>
-                <li class="playlist-item"><a href="#"><i class="fa-solid fa-envelope"></i> GMAIL</a></li>
-                <li class="playlist-item"><a href="#"><i class="fa-solid fa-tv"></i> CARTOONS</a></li>
-                <li class="playlist-item"><a href="#"><i class="fa-solid fa-clapperboard"></i> SERIES/MOVIES</a></li>
-                <li class="playlist-item"><a href="#"><i class="fa-solid fa-mask"></i> XVIDEOS</a></li>
+                <li class="playlist-item"><a href="https://mail.google.com/mail/mu/mp/535/#tl/priority/%5Esmartlabel_personal"><i class="fa-solid fa-envelope"></i> GMAIL</a></li>
+                <li class="playlist-item"><a href="https://www.lacartoons.com/"><i class="fa-solid fa-tv"></i> CARTOONS</a></li>
+                <li class="playlist-item"><a href="https://www.cinecalidad.ec/"><i class="fa-solid fa-clapperboard"></i> SERIES/MOVIES</a></li>
+                <li class="playlist-item"><a href="https://la.movie/"><i class="fa-solid fa-film"></i> SERIES/MOVIES (Sin basura)</a></li>
+                <li class="playlist-item"><a href="https://www.xvideos.com/"><i class="fa-solid fa-mask"></i> XVIDEOS</a></li>
             </ul>
+            <p style="font-size: 0.75rem; color: var(--accent-gray); margin-top: 10px;">Si CARTOONS pide VPN, usa <a href="https://play.google.com/store/apps/details?id=com.free.vpn.mexico.proxy.planet" style="color:var(--primary-color)">Planet VPN</a>.</p>
         </section>
     </main>
 
@@ -187,7 +191,7 @@
 </div>
 
 <script>
-    // --- BUSCADOR REPARADO ---
+    // Script del buscador (reparado)
     document.getElementById('playlistSearch').addEventListener('keyup', function() {
         let filter = this.value.toLowerCase();
         let sections = document.querySelectorAll('.search-section');
@@ -206,28 +210,28 @@
                 }
             });
 
-            // Si no hay items visibles y el filtro no coincide con el título de la sección, ocultamos la sección
             let sectionTitle = section.querySelector('h2').textContent.toLowerCase();
-            if (!hasVisibleItems && !sectionTitle.includes(filter)) {
-                section.classList.add('hidden');
-            } else {
-                section.classList.remove('hidden');
-            }
+            section.classList.toggle('hidden', !hasVisibleItems && !sectionTitle.includes(filter));
         });
     });
 
-    // --- LOGICA DE ESTADO ---
+    // Logica de estado por hora
     const statusElement = document.getElementById("hub-status");
-    const hour = new Date().getHours();
-    let statusText = (hour >= 18 || hour < 6) ? "Observándote" : "Activo";
+    const now = new Date();
+    const hour = now.getHours();
+    let statusText = "";
+    if (hour >= 6 && hour < 12) statusText = "Despertando";
+    else if (hour >= 12 && hour < 18) statusText = "Activo";
+    else if (hour >= 18 && hour < 23) statusText = "Observándote";
+    else statusText = "Viendo que no duermes";
+    
     statusElement.textContent = statusText.toUpperCase();
-    document.getElementById("hub-date").textContent = new Date().toLocaleDateString("es-MX");
+    document.getElementById("hub-date").textContent = now.toLocaleDateString("es-MX");
 
-    // --- AVATAR SYSTEM ---
+    // Avatar Hub
     const avatar = document.getElementById("avatar");
     const panel = document.getElementById("avatar-panel");
     const base = "https://api.dicebear.com/7.x/adventurer-neutral/svg";
-    
     avatar.src = `${base}?seed=demon-01&backgroundColor=000000`;
 
     avatar.addEventListener("click", () => {
@@ -235,15 +239,13 @@
     });
 
     function changeAvatar() {
-        const seed = Math.random().toString(36).substring(7);
-        avatar.src = `${base}?seed=${seed}`;
+        avatar.src = `${base}?seed=${Math.random().toString(36).substring(7)}`;
     }
 
     function toggleStealth() {
         avatar.style.opacity = avatar.style.opacity === "0.2" ? "1" : "0.2";
     }
 
-    // Cerrar panel al hacer clic fuera
     document.addEventListener("click", (e) => {
         if (!avatar.contains(e.target) && !panel.contains(e.target)) panel.style.display = "none";
     });
