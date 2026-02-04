@@ -287,13 +287,14 @@
             return;
         }
 
-        panel.style.display = panel.style.display === "block" ? "none" : "block";
-        ritual.panelOpen = panel.style.display === "block";
+       if (ritual.step === 3 && panel.style.display === "none") {
+    unlockDoor();
+    return;
+}
 
-        if (ritual.step === 3 && !ritual.panelOpen) {
-            ritual.step = 4;
-            unlockDoor();
-        }
+panel.style.display = panel.style.display === "block" ? "none" : "block";
+ritual.panelOpen = panel.style.display === "block";
+
     });
 
     // --- MUTAR AVATAR ---
